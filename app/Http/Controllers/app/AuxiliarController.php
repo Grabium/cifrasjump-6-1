@@ -8,21 +8,27 @@ use Illuminate\Http\Request;
 class AuxiliarController extends Controller
 {
   private $naturais = ['C','D','E','F','G','A','B'];
+
+  private $ordem;
+
+  function setOrdemDeAnalise(String $ordem) 
+  {
+    $this->ordem = $ordem;
+  }
+
+  function getOrdemDeAnalise()
+  {
+    return $this->ordem;
+  }
   
   public function seEA($i, $car)
   {
-    if(($car == "E")||($car == "A")){
-      return $i;
-    }
-    return false;
+    return (($car == "E")||($car == "A")) ? $i : false ;
   }
 
-  public function seNatural($car){
-    if(in_array($car, $this->naturais)){ 
-      return true;
-    }else{
-      return false;
-    }
+  public function seNatural($car)
+  {
+    return in_array($car, $this->naturais) ? true : false ; 
   }
   
 }

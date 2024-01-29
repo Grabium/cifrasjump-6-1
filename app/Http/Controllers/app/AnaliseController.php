@@ -7,16 +7,8 @@ use Illuminate\Http\Request;
 
 class AnaliseController extends AuxiliarController
 {
-  private $ordem;
-  
-  function setOrdemDeAnalise(String $ordem) 
+  public function analisar($chor)
   {
-    $this->ordem = $ordem;  
-    //return $this->ordem;
-  }
-
-  function getOrdemDeAnalise()
-  {
-    return $this->ordem;
+    return $chor . ' recebida com sucesso!';
   }
 }

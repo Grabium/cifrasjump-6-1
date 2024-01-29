@@ -33,11 +33,14 @@ class TextoController extends Controller
   function carNatural($i){
     if($this->analise->seNatural($this->car)){
       $chor = substr($this->texto, $i, ($this->complChor+1)); //em texto
-      $this->chor = $chor . " "; //em texto
-      return $this->chor;
+      return $chor . " "; //em texto
     }
   }
-  
+
+  function enviarChor($chor)
+  {
+    return $this->analise->analisar($chor);
+  }
 
   function loopTexto()
   {
@@ -49,12 +52,15 @@ class TextoController extends Controller
       
       if($this->car == ' '){
         $analise->setOrdemDeAnalise('aberta');
+        //pulei pre-positivo
         continue;
       }
 
       if($analise->getOrdemDeAnalise() == 'aberta'){
         $this->carEA($i);
-        return $this->carNatural($i);
+        return $this->enviarChor($this->carNatural($i));
+        //pulei $i = ($i + $this->analise->pularCaracteres);
+        
       }//If (análise aberta)
     }//for
   }//loopText()
