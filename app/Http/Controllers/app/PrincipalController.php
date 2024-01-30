@@ -7,24 +7,24 @@ use Illuminate\Http\Request;
 
 class PrincipalController extends Controller
 {
-  function __construct()
+  function __construct(Request $request)
   {
-    $this->texto = new TextoController();
-    $this->conversor = new ConversorController();
+    $fator = $request['fator'];
+    settype($fator, 'integer');
+    $this->texto = new TextoController($fator);
   }
   
   function responder(Request $request)
   { 
     $this->texto->setTexto($request['texto']);
-    $this->conversor->setFator($request['fator']);
-    $teste = $this->loopPrincipal(); // pra teste
-    return response()->json(['msgm' => 'Valor / teste = ' .$teste, 'diag' => 'Aplicação finalizado com sucesso!']); //pra teste
+    //$this->conversor->setFator($request['fator']);//na instauração de conversor
+    $teste = $this->toMainLoop(); // pra teste
+    return response()->json(['msgm' => 'teste = ' . $teste, 'diag' => 'Aplicação finalizado com sucesso!']); //pra teste
   }
 
-  function loopPrincipal()
+  function toMainLoop()
   {
-    $teste = $this->texto->loopTexto(); // pra teste
-    return $teste;// pra teste
+    return $this->texto->loopTexto(); // pra teste
   }
 
   

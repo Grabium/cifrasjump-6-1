@@ -9,7 +9,7 @@ class AuxiliarController extends Controller
 {
   private $naturais = ['C','D','E','F','G','A','B'];
 
-  private $ordem;
+  private $ordem = 'aberta';
 
   function setOrdemDeAnalise(String $ordem) 
   {
